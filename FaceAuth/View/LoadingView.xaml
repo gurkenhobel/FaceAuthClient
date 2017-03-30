@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="FaceAuth.View.LoadingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FaceAuth.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" 
+             d:DesignWidth="400"
+             Background="#FFC7C7C7">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,0" TextWrapping="Wrap" Text="{Binding Message}"/>
+        <Image RenderTransformOrigin="0.5, 0.5" x:Name="loadingAnim" Grid.Row="1" Source="/FaceAuth;component/Resources/LoadingFrame.png">
+            <Image.RenderTransform>
+                <RotateTransform x:Name="noFreeze" />
+            </Image.RenderTransform>
+            <Image.Triggers>
+                <EventTrigger RoutedEvent="Image.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard TargetName="loadingAnim" TargetProperty="RenderTransform.Angle">
+                            <DoubleAnimation To="360" RepeatBehavior="Forever" Duration="0:0:1"></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Image.Triggers>
+        </Image>
+    </Grid>
+</UserControl>

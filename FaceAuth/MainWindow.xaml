@@ -1,0 +1,50 @@
+﻿<Window x:Class="FaceAuth.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FaceAuth"
+        xmlns:viewModel="clr-namespace:FaceAuth.ViewModel"
+        xmlns:view="clr-namespace:FaceAuth.View"
+        xmlns:converters="clr-namespace:FaceAuth.Converters"
+        mc:Ignorable="d"
+        Title="{Binding Path=WindowProperties.Title, Mode=TwoWay}" 
+        ResizeMode="{Binding Path=WindowProperties.CanResize, Converter={converters:BoolToWindowResizeConverter}}" 
+        Width="{Binding Path=WindowProperties.Width, Mode=TwoWay}" 
+        Height="{Binding Path=WindowProperties.Height, Mode=TwoWay}" 
+        WindowStartupLocation="CenterScreen" Icon="Resources/Icon.ico" Cursor="">
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
+            <view:LoginView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:FaceCaptureViewModel}">
+            <view:FaceCaptureView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:ExplorerViewModel}">
+            <view:ExplorerView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:RegisterViewModel}">
+            <view:RegisterView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:LoadingViewModel}">
+            <view:LoadingView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MessageViewModel}">
+            <view:MessageView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:CameraConfigViewModel}">
+            <view:CameraConfigView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:CreateFileViewModel}">
+            <view:CreateFileView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:EnterPasswordViewModel}">
+            <view:EnterPasswordView/>
+        </DataTemplate>
+    </Window.Resources>
+    <ContentControl Content="{Binding CurrentView}" Focusable="False" />
+</Window>
